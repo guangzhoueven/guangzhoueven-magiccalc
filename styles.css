@@ -17,12 +17,15 @@ body {
 }
 
 .calculator {
-  width: 1080px !important;
-  height: 2400px !important;
+  width: 100%;
+  max-width: 430px;
+  height: 100vh;
+  max-height: 932px;
   background: #000;
   display: flex;
   flex-direction: column;
   position: relative;
+  margin: 0 auto;
 }
 
 /* 顶部状态栏 */
@@ -30,15 +33,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 22px 45px 0;
-  height: 105px;
+  padding: 12px 24px 0;
+  height: 50px;
   color: #fff;
-  font-size: 24px;
+  font-size: 14px;
   font-weight: 600;
 }
 
 .status-bar .time {
-  font-size: 28px;
+  font-size: 16px;
   font-weight: 700;
 }
 
@@ -49,8 +52,8 @@ body {
 }
 
 .status-bar .icons svg {
-  width: 36px;
-  height: 36px;
+  width: 18px;
+  height: 18px;
 }
 
 /* 显示区域 */
@@ -59,19 +62,19 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 54px 31px;
-  min-height: 405px;
+  padding: 0 28px 16px;
+  min-height: 200px;
   overflow: hidden;
 }
 
 .expression {
   color: rgba(255, 255, 255, 0.4);
-  font-size: 32px;
+  font-size: 22px;
   text-align: right;
-  min-height: 63px;
-  line-height: 63px;
+  min-height: 32px;
+  line-height: 32px;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -80,12 +83,12 @@ body {
 
 .result {
   color: #fff;
-  font-size: 96px;
+  font-size: 64px;
   text-align: right;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  letter-spacing: 1px;
   line-height: 1.15;
-  min-height: 144px;
+  min-height: 74px;
   transition: font-size 0.15s ease;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,26 +96,26 @@ body {
 }
 
 .result.small {
-  font-size: 72px;
+  font-size: 48px;
 }
 
 .result.xsmall {
-  font-size: 56px;
+  font-size: 36px;
 }
 
 /* 按钮区域 */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 22px;
-  padding: 15px 31px 40px;
+  gap: 12px;
+  padding: 8px 16px 20px;
 }
 
 .btn {
   aspect-ratio: 1 / 0.62;
-  border-radius: 54px;
+  border-radius: 28px;
   border: none;
-  font-size: 42px;
+  font-size: 28px;
   font-weight: 400;
   cursor: pointer;
   display: flex;
@@ -122,7 +125,7 @@ body {
   position: relative;
   overflow: hidden;
   font-family: inherit;
-  letter-spacing: 0.75px;
+  letter-spacing: 0.5px;
 }
 
 .btn:active {
@@ -143,14 +146,14 @@ body {
 .btn-func {
   background: #1c1c1e;
   color: #fff;
-  font-size: 34px;
+  font-size: 22px;
 }
 
 /* 操作键 - 橙色 */
 .btn-op {
   background: #f09a37;
   color: #fff;
-  font-size: 48px;
+  font-size: 32px;
 }
 
 .btn-op:active {
@@ -166,7 +169,7 @@ body {
 .btn-equals {
   background: #46c45b;
   color: #fff;
-  font-size: 48px;
+  font-size: 32px;
 }
 
 .btn-equals:active {
@@ -177,14 +180,14 @@ body {
 .btn-zero {
   grid-column: span 2;
   aspect-ratio: 2.12 / 0.62;
-  border-radius: 54px;
+  border-radius: 28px;
 }
 
 /* AC / C 键 */
 .btn-clear {
   background: #1c1c1e;
   color: #fff;
-  font-size: 34px;
+  font-size: 22px;
 }
 
 .btn-clear:active {
@@ -198,15 +201,15 @@ body {
 }
 
 .btn-backspace svg {
-  width: 54px;
-  height: 54px;
+  width: 28px;
+  height: 28px;
 }
 
 /* 百分号 */
 .btn-percent {
   background: #1c1c1e;
   color: #fff;
-  font-size: 34px;
+  font-size: 22px;
 }
 
 /* 波纹效果 */
@@ -247,10 +250,10 @@ body {
 /* 锁定状态小提示 - 极其隐蔽 */
 .lock-indicator {
   position: absolute;
-  top: 105px;
-  right: 45px;
-  width: 9px;
-  height: 9px;
+  top: 50px;
+  right: 24px;
+  width: 4px;
+  height: 4px;
   border-radius: 50%;
   background: transparent;
   transition: background 0.3s ease;
@@ -298,14 +301,14 @@ body {
 @media (max-height: 700px) {
   .btn {
     aspect-ratio: 1 / 0.52;
-    border-radius: 20px;
-    font-size: 20px;
+    border-radius: 22px;
+    font-size: 24px;
   }
   .btn-zero {
     aspect-ratio: 2.12 / 0.52;
   }
   .result {
-    font-size: 46px;
+    font-size: 52px;
   }
   .buttons {
     gap: 8px;
@@ -315,6 +318,6 @@ body {
 
 @media (min-height: 800px) {
   .display-area {
-    min-height: 240px;
+    min-height: 280px;
   }
 }
