@@ -13,12 +13,12 @@ body {
   align-items: center;
   min-height: 100vh;
   font-family: 'MiSans', -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  overflow: hidden;
+  overflow: auto;
 }
 
 .calculator {
-  width: 1080px;
-  height: 2400px;
+  width: 1620px !important;
+  height: 3600px !important;
   background: #000;
   display: flex;
   flex-direction: column;
@@ -30,15 +30,15 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 15px 30px 0;
-  height: 70px;
+  padding: 22px 45px 0;
+  height: 105px;
   color: #fff;
-  font-size: 20px;
+  font-size: 30px;
   font-weight: 600;
 }
 
 .status-bar .time {
-  font-size: 24px;
+  font-size: 36px;
   font-weight: 700;
 }
 
@@ -49,8 +49,8 @@ body {
 }
 
 .status-bar .icons svg {
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
 }
 
 /* 显示区域 */
@@ -59,19 +59,19 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 36px 21px;
-  min-height: 270px;
+  padding: 0 54px 31px;
+  min-height: 405px;
   overflow: hidden;
 }
 
 .expression {
   color: rgba(255, 255, 255, 0.4);
-  font-size: 30px;
+  font-size: 45px;
   text-align: right;
-  min-height: 42px;
-  line-height: 42px;
+  min-height: 63px;
+  line-height: 63px;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  letter-spacing: 2.25px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -80,12 +80,12 @@ body {
 
 .result {
   color: #fff;
-  font-size: 84px;
+  font-size: 126px;
   text-align: right;
   font-weight: 300;
-  letter-spacing: 1.5px;
+  letter-spacing: 2.25px;
   line-height: 1.15;
-  min-height: 96px;
+  min-height: 144px;
   transition: font-size 0.15s ease;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -93,26 +93,26 @@ body {
 }
 
 .result.small {
-  font-size: 63px;
+  font-size: 94px;
 }
 
 .result.xsmall {
-  font-size: 48px;
+  font-size: 72px;
 }
 
 /* 按钮区域 */
 .buttons {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 15px;
-  padding: 10px 21px 27px;
+  gap: 22px;
+  padding: 15px 31px 40px;
 }
 
 .btn {
   aspect-ratio: 1 / 0.62;
-  border-radius: 36px;
+  border-radius: 54px;
   border: none;
-  font-size: 36px;
+  font-size: 54px;
   font-weight: 400;
   cursor: pointer;
   display: flex;
@@ -122,7 +122,7 @@ body {
   position: relative;
   overflow: hidden;
   font-family: inherit;
-  letter-spacing: 0.75px;
+  letter-spacing: 1.125px;
 }
 
 .btn:active {
@@ -143,14 +143,14 @@ body {
 .btn-func {
   background: #1c1c1e;
   color: #fff;
-  font-size: 30px;
+  font-size: 45px;
 }
 
 /* 操作键 - 橙色 */
 .btn-op {
   background: #f09a37;
   color: #fff;
-  font-size: 42px;
+  font-size: 63px;
 }
 
 .btn-op:active {
@@ -166,7 +166,7 @@ body {
 .btn-equals {
   background: #46c45b;
   color: #fff;
-  font-size: 42px;
+  font-size: 63px;
 }
 
 .btn-equals:active {
@@ -177,14 +177,14 @@ body {
 .btn-zero {
   grid-column: span 2;
   aspect-ratio: 2.12 / 0.62;
-  border-radius: 36px;
+  border-radius: 54px;
 }
 
 /* AC / C 键 */
 .btn-clear {
   background: #1c1c1e;
   color: #fff;
-  font-size: 30px;
+  font-size: 45px;
 }
 
 .btn-clear:active {
@@ -198,15 +198,15 @@ body {
 }
 
 .btn-backspace svg {
-  width: 36px;
-  height: 36px;
+  width: 54px;
+  height: 54px;
 }
 
 /* 百分号 */
 .btn-percent {
   background: #1c1c1e;
   color: #fff;
-  font-size: 30px;
+  font-size: 45px;
 }
 
 /* 波纹效果 */
@@ -247,10 +247,10 @@ body {
 /* 锁定状态小提示 - 极其隐蔽 */
 .lock-indicator {
   position: absolute;
-  top: 70px;
-  right: 30px;
-  width: 6px;
-  height: 6px;
+  top: 105px;
+  right: 45px;
+  width: 9px;
+  height: 9px;
   border-radius: 50%;
   background: transparent;
   transition: background 0.3s ease;
