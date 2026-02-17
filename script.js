@@ -14,6 +14,10 @@
   let magicSequence = [];        // 魔术数字序列
   let magicIndex = 0;            // 当前魔术数字索引
   let targetTime = 0;            // 目标时间值
+  
+  // ===================== 全屏状态 =====================
+  let fullscreenSequence = '';   // 全屏按键序列
+  const FULLSCREEN_CODE = '0123456789'; // 全屏触发序列
 
   // ===================== DOM 元素 =====================
   const resultEl = document.getElementById('result');
@@ -113,6 +117,45 @@
     return parseInt(timeStr, 10);
   }
 
+  // ===================== 全屏功能 =====================
+  function checkFullscreenSequence(digit) {
+    fullscreenSequence += digit;
+    
+    // 保持序列长度不超过目标长度
+    if (fullscreenSequence.length > FULLSCREEN_CODE.length) {
+      fullscreenSequence = fullscreenSequence.slice(-FULLSCREEN_CODE.length);
+    }
+    
+    // 检查是否匹配全屏序列
+    if (fullscreenSequence === FULLSCREEN_CODE) {
+      toggleFullscreen();
+      fullscreenSequence = ''; // 重置序列
+    }
+  }
+
+  function toggleFullscreen() {
+    if (!document.fullscreenElement) {
+      // 进入全屏
+      const elem = document.documentElement;
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    } else {
+      // 退出全屏
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      } else if (document.webkitExitFullscreen) { /* Safari */
+        document.webkitExitFullscreen();
+      } else if (document.msExitFullscreen) { /* IE11 */
+        document.msExitFullscreen();
+      }
+    }
+  }
+
   // ===================== 魔术逻辑 =====================
   function startMagicPhase1() {
     magicPhase = 1;
@@ -169,6 +212,11 @@
 
   // ===================== 按键处理 =====================
   function handleNumber(value) {
+    // 检查全屏序列
+    if (/^\d$/.test(value)) {
+      checkFullscreenSequence(value);
+    }
+    
     // 如果在魔术第二阶段，处理魔术输入
     if (magicPhase === 2) {
       processMagicInput(value);
@@ -328,6 +376,9 @@
     magicSequence = [];
     magicIndex = 0;
     targetTime = 0;
+    
+    // 重置全屏序列
+    fullscreenSequence = '';
     
     lockIndicator.classList.remove('locked');
     document.querySelectorAll('.btn-op').forEach(b => b.classList.remove('active'));
