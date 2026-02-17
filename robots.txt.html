@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no, maximum-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="春晚同款魔术计算器，和观众互动后算出的数字一定等于当前时间，快来体验魔术师的快乐。" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  <title>魔术计算器 - 春晚同款</title>
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="icon-192.svg" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="phone">
+    <section class="calc" aria-label="magic calculator">
+      <header class="top-bar">
+        <button class="icon-btn" id="icon-left" aria-label="menu">
+          <span class="icon icon-list"></span>
+        </button>
+        <div class="top-right">
+          <button class="icon-btn icon-btn-help" id="helpBtn" aria-label="help">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2"></circle>
+              <path d="M9.7 9.4a2.5 2.5 0 1 1 3.9 2.1c-.9.6-1.4 1.1-1.4 2.2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+              <circle cx="12" cy="17.4" r="1.2" fill="currentColor"></circle>
+            </svg>
+            <span>帮助</span>
+          </button>
+          <button class="icon-btn" id="shareBtnTop" aria-label="share">
+            <svg class="icon-svg icon-share" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 10.981L15.027 2v4.99C3.075 6.99 1.711 16.678 2.043 22l.007-.041c.502-2.685.712-6.986 12.977-6.986v4.99L22 10.98z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+          <button class="icon-btn" id="icon-right" aria-label="keypad">
+            <svg class="icon-svg" viewBox="0 0 24 24" aria-hidden="true">
+              <rect x="3" y="2.5" width="18" height="19" rx="4" fill="none" stroke="currentColor" stroke-width="2"></rect>
+              <rect x="6" y="5.5" width="12" height="3" rx="1.4" fill="currentColor"></rect>
+              <circle cx="8" cy="12" r="1.2" fill="currentColor"></circle>
+              <circle cx="12" cy="12" r="1.2" fill="currentColor"></circle>
+              <circle cx="16" cy="12" r="1.2" fill="currentColor"></circle>
+              <circle cx="8" cy="16" r="1.2" fill="currentColor"></circle>
+              <circle cx="12" cy="16" r="1.2" fill="currentColor"></circle>
+              <circle cx="16" cy="16" r="1.2" fill="currentColor"></circle>
+            </svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="display-wrap">
+        <div id="expr" class="expr">&nbsp;</div>
+        <div id="display" class="display">0</div>
+      </section>
+
+      <section id="debug" class="debug" aria-live="polite"></section>
+
+      <section class="keys" id="keys">
+        <button data-key="back" class="key key-fn">⌫</button>
+        <button data-key="ac" class="key key-fn">AC</button>
+        <button data-key="%" class="key key-fn">%</button>
+        <button data-key="÷" class="key key-op">÷</button>
+
+        <button data-key="7" class="key">7</button>
+        <button data-key="8" class="key">8</button>
+        <button data-key="9" class="key">9</button>
+        <button data-key="×" class="key key-op">×</button>
+
+        <button data-key="4" class="key">4</button>
+        <button data-key="5" class="key">5</button>
+        <button data-key="6" class="key">6</button>
+        <button data-key="-" class="key key-op">−</button>
+
+        <button data-key="1" class="key">1</button>
+        <button data-key="2" class="key">2</button>
+        <button data-key="3" class="key">3</button>
+        <button data-key="+" class="key key-op">+</button>
+
+        <button data-key="±" class="key key-sign">+/-</button>
+        <button data-key="0" class="key">0</button>
+        <button data-key="." class="key">.</button>
+        <button data-key="=" class="key key-op">=</button>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="configDialog" class="config">
+    <form method="dialog" class="config-card" id="configForm">
+      <div class="sheet-top">
+        <div class="sheet-grabber" aria-hidden="true"></div>
+        <div class="config-head">
+          <h2>魔术配置</h2>
+          <button type="button" id="cfgClose" class="cfg-close" aria-label="关闭">✕</button>
+        </div>
+      </div>
+
+      <div class="sheet-body">
+        <button type="button" id="cfgHelpDoc" class="cfg-help-link">帮助文档</button>
+
+        <label class="cfg-item cfg-item-first">
+          真实数字输入次数
+          <input type="number" min="1" max="20" step="1" id="cfgCount" />
+        </label>
+
+        <label class="cfg-item">
+          计算时间延时（秒）
+          <input type="number" min="0" max="3600" step="1" id="cfgDelay" />
+        </label>
+
+        <label class="cfg-item">
+          魔术模式启动暗号
+          <input type="text" inputmode="numeric" id="cfgStartCode" placeholder="请填写数字，留空默认启动" maxlength="5" />
+        </label>
+
+        <label class="switch-row cfg-item" for="cfgDebug">
+          <span>调试信息</span>
+          <span class="switch">
+            <input type="checkbox" id="cfgDebug" />
+            <span class="slider"></span>
+          </span>
+        </label>
+
+        <button value="save" id="cfgSave" class="cfg-btn cfg-btn-primary cfg-save-btn">保存</button>
+
+        <button type="button" id="shareBtnDrawer" class="cfg-btn cfg-btn-outline hidden" aria-label="分享">
+          <svg class="icon-svg icon-share" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M22 10.981L15.027 2v4.99C3.075 6.99 1.711 16.678 2.043 22l.007-.041c.502-2.685.712-6.986 12.977-6.986v4.99L22 10.98z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span>分享给好友</span>
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="helpDialog" class="config">
+    <section class="config-card help-card" id="helpCard">
+      <div class="sheet-top">
+        <div class="sheet-grabber" aria-hidden="true"></div>
+        <div class="config-head">
+          <h2>魔术操作说明</h2>
+          <button type="button" id="helpClose" class="cfg-close" aria-label="关闭">✕</button>
+        </div>
+      </div>
+
+      <div class="sheet-body help-content">
+        <section class="help-item">
+          <h3>第一环节（真实输入）</h3>
+          <p>观众输入一个或多个数字，每次按 <code>+</code> 进行累加，得到 <code>R1</code>。</p>
+        </section>
+
+        <section class="help-item">
+          <h3>第二环节（魔术输出）</h3>
+          <p>进入第二环节后，按键值会被忽略。每按一次，只会输出预设 <code>R2</code> 的下一位，最终满足 <code>R1 + R2 = 目标时间</code>。</p>
+        </section>
+
+        <section class="help-item">
+          <h3>进入配置代码</h3>
+          <p><code>88224466(上上下下左左右右）=</code></p>
+        </section>
+
+        <section class="help-item">
+          <h3>魔术模式启动暗号</h3>
+          <p>可在配置里设置一个启动数字（最多5位）作为暗号。若设置了暗号，只有第一笔输入数字等于该暗号时，才进入魔术模式；留空则默认直接启动魔术模式。</p>
+        </section>
+
+        <section class="help-item help-item-emphasis">
+          <h3>添加到桌面（推荐）</h3>
+          <p>Safari 点击分享按钮 → 选择「添加到主屏幕」，可获得更稳定的全屏体验。</p>
+        </section>
+
+        <section class="help-item help-footer">
+          <p>感谢使用，欢迎关注开发者小红书（<a href="https://xhslink.com/m/7R05R3CWsJk" target="_blank" rel="noopener noreferrer">奇思妙坦</a>），X（<a href="https://x.com/tankxu" target="_blank" rel="noopener noreferrer">@tankxu</a>）。</p>
+        </section>
+      </div>
+    </section>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
