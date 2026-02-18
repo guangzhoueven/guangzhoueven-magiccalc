@@ -7,6 +7,19 @@
 <meta name="description" content="春晚同款魔术计算器，仿小米手机原生计算器UI，支持真实运算，隐藏魔术功能让你变身数学魔术师！">
 <meta name="keywords" content="魔术计算器,春晚魔术,计算器魔术揭秘,小米计算器,数学魔术,在线计算器">
 
+<!-- PWA Meta Tags -->
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="魔术计算器">
+<meta name="application-name" content="魔术计算器">
+<meta name="msapplication-TileColor" content="#000000">
+<meta name="msapplication-config" content="browserconfig.xml">
+
+<!-- PWA Manifest -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-192.svg">
+
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -63,5 +76,21 @@
 </div>
 
 <script src="script.js"></script>
+
+<!-- PWA Service Worker Registration -->
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('./sw.js')
+      .then(function(registration) {
+        console.log('ServiceWorker registration successful with scope: ', registration.scope);
+      })
+      .catch(function(err) {
+        console.log('ServiceWorker registration failed: ', err);
+      });
+  });
+}
+</script>
+
 </body>
 </html>
