@@ -47,13 +47,37 @@ body {
 
 .status-bar .icons {
   display: flex;
-  gap: 6px;
+  gap: 4px;
   align-items: center;
+}
+
+.status-bar .icons:first-child {
+  margin-right: auto;
+}
+
+.status-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.battery-icon {
+  margin-right: 16px;
 }
 
 .status-bar .icons svg {
   width: 18px;
   height: 18px;
+}
+
+.carrier-info {
+  color: #fff;
+  font-size: 14px;
+  font-weight: 550;
+  margin-right: 4px;
+  position: relative;
+  top: -1px;
 }
 
 /* 显示区域 */
