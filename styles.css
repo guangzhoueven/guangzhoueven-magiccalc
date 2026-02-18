@@ -47,7 +47,7 @@ body {
 
 .status-bar .icons {
   display: flex;
-  gap: 4px;
+  gap: 2px;
   align-items: center;
 }
 
@@ -75,7 +75,7 @@ body {
   color: #fff;
   font-size: 14px;
   font-weight: 550;
-  margin-right: 4px;
+  margin-right: 2px;
   position: relative;
   top: -1px;
 }
